@@ -1,0 +1,5 @@
+<apex:page showHeader="false" sidebar="false">
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1> This is your Profile page.</h1>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

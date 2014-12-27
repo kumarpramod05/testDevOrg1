@@ -1,0 +1,36 @@
+<apex:page Controller="SearchComponentClass" sidebar="false" showHeader="false"> 
+  <apex:form >
+      <apex:outputPanel id="jsPanel">
+          <script>
+              function gotoComponent()
+              {
+                 
+                  if('{!IditemFound}' != '')
+                  {
+                      window.top.location.href  = '/'+'{!IditemFound}';
+                  }
+                  else
+                  {
+                      if('{!SelectedType}' == 'ApexClass')
+                          window.top.location.href  = '/01p?DevToolsIntegrate&setupid=ApexClasses';
+                      else if('{!SelectedType}' == 'ApexPage')
+                          window.top.location.href  = '/apexpages/setup/listApexPage.apexp?DDevToolsIntegrate&setupid=ApexPages';
+                      else if('{!SelectedType}' == 'ApexComponent')
+                          window.top.location.href  = '/apexpages/setup/listApexComponent.apexp?DevToolsIntegrate&setupid=ApexComponents';
+                           
+                  }
+                  
+              }
+          </script>
+         
+      </apex:outputPanel>
+      <apex:actionFunction name="LaunchSearch" action="{!toSearch}" oncomplete="gotoComponent();" reRender="jsPanel"/>
+      <apex:selectList id="chooseComponent" value="{!selectedType}" size="1">
+            <apex:selectOption itemValue="ApexClass" itemLabel="Apex Class"/>
+            <apex:selectOption itemValue="ApexPage" itemLabel="Visualforce Page"/>
+            <apex:selectOption itemValue="ApexComponent" itemLabel="Visualforce Component"/>
+        </apex:selectList>
+        <apex:inputText value="{!toSearchItem}"/>
+        <apex:CommandButton onclick="LaunchSearch();" value="Search" reRender="jsPanel" />
+  </apex:form>
+</apex:page>

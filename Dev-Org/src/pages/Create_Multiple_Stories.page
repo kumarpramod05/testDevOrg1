@@ -1,0 +1,50 @@
+<apex:page standardController="CT_Story__c" extensions="AddStoryExtension" showHeader="false" sidebar="false" tabStyle="CT_Story__c" recordSetVar="Stories" title="Add Stories">
+     <apex:form >
+       <apex:includeScript value="/support/console/22.0/integration.js"/>
+        <script type="text/javascript">
+        
+           var callCloseTab = function callCloseTab(result) {
+            sforce.console.closeTab(result.id);
+        } 
+            function closeTab() {
+                
+                sforce.console.getEnclosingTabId(callCloseTab);
+            }
+
+       </script>
+          <div class="content">
+                    <img title="Task"  alt="Task" src="/img/icon/flag32.png"/>
+                    <h1 style="font-size:200%;">Add Stories </h1>
+                    <div class="blank">&nbsp;</div>
+          </div>
+          <apex:pageMessages ></apex:pageMessages>
+          <apex:pageBlock title="Create New Stories">
+              <apex:pageBlockButtons >
+                  <apex:commandButton action="{!Save}" value="Save" oncomplete="closeTab();return false;"/>
+                  <apex:commandButton action="{!Cancel}" value="Cancel" onClick="closeTab();return false;"/>
+              </apex:pageBlockButtons>
+              <apex:pageBlockSection >
+                  <apex:pageBlockTable value="{!storyList}" var="t" rows="5">
+                      <apex:column headerValue="Story No." style="width:20px;">
+                          <apex:outPutLabel > {!t.index}.</apex:outPutLabel>
+                      </apex:column>
+                      <apex:column headerValue="Story Title">
+                          <apex:inputField value="{!t.stories.Title__c}"/>
+                      </apex:column>   
+                      <apex:column headerValue="Role As a">
+                          <apex:inputField value="{!t.stories.As_a__c}"/>
+                      </apex:column> 
+                      <apex:column headerValue="Project">
+                          <apex:inputField value="{!t.stories.Project__c}"/>
+                      </apex:column> 
+                      <apex:column headerValue="Story Owner">
+                          <apex:inputField value="{!t.stories.Owner__c}"/>
+                      </apex:column> 
+                       <apex:column headerValue="Story's Sprint">
+                          <apex:inputField value="{!t.stories.Sprint__c}"/>
+                      </apex:column>     
+                  </apex:pageBlockTable>
+               </apex:pageBlockSection>
+          </apex:pageBlock>
+  </apex:form> 
+</apex:page>

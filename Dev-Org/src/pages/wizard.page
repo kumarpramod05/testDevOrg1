@@ -1,0 +1,10 @@
+<apex:page controller="mycontroller">
+<apex:form >
+    <apex:pageblock >
+     <apex:pageblockbuttons >
+            <apex:commandButton action="{!gotoStep2}" value="Next"/>
+        </apex:pageblockbuttons>
+
+    </apex:pageblock>
+</apex:form>
+</apex:page>

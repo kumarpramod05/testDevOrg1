@@ -1,0 +1,26 @@
+<apex:page standardController="Student__c" extensions="StudentSearchController">
+    <apex:form >
+     <apex:pageblock > 
+     <apex:outputPanel rendered="{!IF(studenSeq != null && studenSeq  > 0, true, false)}" />
+     
+         <apex:pageBlockSection title="Search Criteria">
+             <apex:inputText label="Enter Name" value="{!studentName}" id="studentName" /> 
+             
+         </apex:pageBlockSection>
+         
+         <apex:pageBlockButtons >
+             <apex:commandButton action="{!search}" value="Search"/>
+         </apex:pageBlockButtons>
+         
+         <apex:pageBlockSection title="Search Results" rendered="{!if(students != null && students.size > 0, true, false)}">
+             <apex:pageBlockTable value="{!students}" var="lst">
+                 <apex:column headerValue="Student Name" value="{!lst.name}"/> 
+             </apex:pageBlockTable>
+         
+         </apex:pageBlockSection>         
+     </apex:pageblock>
+     
+
+
+     </apex:form>
+</apex:page>

@@ -1,0 +1,32 @@
+<apex:page standardController="Student__c" extensions="StudentSearchController" showHeader="false" sidebar="false">
+    <apex:form >
+        <table border="1">
+        <apex:variable var="row" value="1"/>
+        <apex:repeat var="s" value="{!studentDetails}">
+        <tr>
+            <apex:outputText rendered="{!if(VALUE(row)=1, true, false)}">
+            <td>Test11</td>
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!if(VALUE(row)=2, true, false)}">
+                <td>Test2</td>
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!if(VALUE(row)=3, true, false)}">
+                <td>Test3</td>
+            </apex:outputText>            
+
+            <apex:outputText rendered="{!if(VALUE(row)=4, true, false)}">
+                <td>Test4</td>
+            </apex:outputText>
+            <td><apex:inputField value="{!s.name}" label="Name"/></td>
+        </tr>
+                <apex:variable var="row" value="{!VALUE(row)+1}"/>
+
+        </apex:repeat> 
+        </table>
+        
+        <apex:commandButton value="Search" action="{!search}"/>
+        
+            </apex:form>
+</apex:page>

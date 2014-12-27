@@ -1,0 +1,59 @@
+<apex:page standardController="Account" extensions="CopyAccountDetail" recordSetVar="accounts">
+    <apex:form >
+        <apex:pageBlock id="accountListBlock">        
+            <apex:pageblockSection rendered="{!(!addNewRecordActive)}" title="Search Seaction" columns="4" collapsible="false" id="searchSection">
+                <apex:outputLabel style="width:10%">Search By Name </apex:outputLabel>
+                <apex:inputText id="searchName" value="{!accountName}" style="float:left;"/>
+                <apex:commandButton value="Search" action="{!search}" reRender="accountsListSection" status="fetchStatus" style="float:left;"/>
+                <apex:commandButton style="float:right;" value="Add New Record" action="{!addNewRecord}" />                
+            </apex:pageblockSection>
+            
+            <apex:pageBlockSection rendered="{!(!addNewRecordActive)}" columns="1" id="accountsListSection">
+                <apex:pageBlockTable value="{!Accounts}" var="acc">
+                    <apex:column value="{!acc.Id}"/>
+                    <apex:column value="{!acc.Name}"/>
+                    <apex:column value="{!acc.AccountNumber}"/>
+                    <apex:column value="{!acc.Site}"/>
+                    <apex:column value="{!acc.NumberOfEmployees}"/>
+                    <apex:column value="{!acc.Phone}"/>
+                    <apex:column value="{!acc.Sic}"/>
+                    <apex:column value="{!acc.Website}"/>
+                    <apex:column >                        
+                        <apex:commandLink value="Edit" action="{!editAccount}">
+                            <apex:param name="accountIdVal" value="{!acc.Id}" assignTo="{!accountId}"/>
+                        </apex:commandLink>&nbsp;
+                        <apex:commandLink value="Delete" action="{!deleteAccount}" reRender="AccountListBlock" immediate="true">
+                            <apex:param name="accountId" value="{!acc.Id}" assignTo="{!accountId}"/>
+                        </apex:commandLink>
+                    </apex:column>
+                </apex:pageBlockTable>
+                
+                <apex:panelGrid columns="5" cellspacing="5">
+                    <apex:commandButton status="fetchStatus" reRender="accountsListSection" value="first" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page"/>
+                    <apex:commandButton status="fetchStatus" reRender="accountsListSection" value="previous" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page"/>
+                    <apex:commandButton status="fetchStatus" reRender="accountsListSection" value="next" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page"/>
+                    <apex:commandButton status="fetchStatus" reRender="accountsListSection" value="last" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page"/>
+                    <apex:outputPanel style="color:#4AA02C;font-weight:bold">
+                        <apex:actionStatus id="fetchStatus" startText="Fetching..."/>
+                    </apex:outputPanel>
+                </apex:panelGrid>                
+            </apex:pageBlockSection>            
+        </apex:pageBlock>
+
+        <apex:pageBlock rendered="{!addNewRecordActive}"  id="addNewAccount"> 
+            <apex:pageBlockSection title="Add New Account" >
+                <apex:inputField value="{!account.Name}"/>
+                <apex:inputField value="{!account.AccountNumber}"/>
+                <apex:inputField value="{!account.Site}"/>
+                <apex:inputField value="{!account.NumberOfEmployees}"/>
+                <apex:inputField value="{!account.Phone}"/>
+                <apex:inputField value="{!account.Sic}"/>
+                <apex:inputField value="{!account.Website}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!saveAccount}" value="Submit"/>
+                <apex:commandButton action="{!cancelAccount}" value="Cancel"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

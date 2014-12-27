@@ -1,0 +1,46 @@
+<apex:page standardController="Task__c" extensions="AddTaskExtension" showHeader="false" sidebar="false" tabStyle="Task__c" recordSetVar="Tasks" title="Add Tasks">
+     <apex:form >
+       <apex:includeScript value="/support/console/22.0/integration.js"/>
+        <script type="text/javascript">
+   
+           var callCloseTab = function callCloseTab(result) {
+            sforce.console.closeTab(result.id);
+          } 
+            function closeTab() {
+                sforce.console.getEnclosingTabId(callCloseTab);
+            }
+     
+       </script>
+          <div class="content">
+                    <img title="Task"  alt="Task" src="/img/icon/flag32.png"/>
+                    <h1 style="font-size:200%;">Add Tasks</h1>
+                    <div class="blank">&nbsp;</div>
+          </div>
+          <apex:pageMessages ></apex:pageMessages>
+          <apex:pageBlock title="Create New Tasks">
+              <apex:pageBlockButtons >
+                  <apex:commandButton action="{!Save}" value="Save" oncomplete="closeTab();return false;"/>
+                  <apex:commandButton action="{!Cancel}" value="Cancel" onclick="closeTab();return false;"/>
+              </apex:pageBlockButtons>
+              <apex:pageBlockSection >
+                  <apex:pageBlockTable value="{!taskList}" var="t" rows="5">
+                      <apex:column headerValue="Task No." style="width:20px;">
+                          <apex:outPutLabel > {!t.index}.</apex:outPutLabel>
+                      </apex:column>
+                      <apex:column headerValue="Task Name">
+                          <apex:inputField value="{!t.tasks.Name}"/>
+                      </apex:column>   
+                      <apex:column headerValue="Task Estimate Duration">
+                          <apex:inputField value="{!t.tasks.Estimate__c}"/>
+                      </apex:column> 
+                      <apex:column headerValue="Story">
+                          <apex:inputField value="{!t.tasks.Story__c}"/>
+                      </apex:column> 
+                      <apex:column headerValue="Owner">
+                          <apex:inputField value="{!t.tasks.Owner__c}"/>
+                      </apex:column> 
+                  </apex:pageBlockTable>
+               </apex:pageBlockSection>
+          </apex:pageBlock>
+  </apex:form> 
+</apex:page>

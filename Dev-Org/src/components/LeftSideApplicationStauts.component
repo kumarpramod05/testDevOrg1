@@ -1,0 +1,8 @@
+<apex:component >
+    <apex:form >
+       <table>
+           
+       
+       </table> 
+    </apex:form>
+</apex:component>

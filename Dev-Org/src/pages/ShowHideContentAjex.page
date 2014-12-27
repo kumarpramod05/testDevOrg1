@@ -1,0 +1,22 @@
+<apex:page controller="ShowHideHTMLControler">  
+    <apex:form >  
+        <apex:outputpanel id="contentPanel">  
+<h1>Show/Hide HTML form Visualforce Example</h1>  
+
+<div>  
+   <apex:inputText value="{!test }"/>
+
+</div>  
+
+<div id="contentToToggle" style="display:{!if(showContent,"block","none")};">  
+  <apex:outputPanel >
+      <apex:outputLabel value="This is the content that will be toggled.  "></apex:outputLabel>
+      
+  </apex:outputPanel>
+
+</div>  
+  
+        </apex:outputpanel>  
+        <apex:commandbutton value="Toggle Content" action="{!toggleContent}" rerender="contentPanel">  
+    </apex:commandbutton></apex:form>  
+</apex:page>

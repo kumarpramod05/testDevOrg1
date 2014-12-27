@@ -1,0 +1,9 @@
+<apex:page controller="FieldTest">
+<apex:form >
+    <Apex:pageBlockSection >
+   <apex:pageBlockSectionItem rendered="{!NOT(ISNULL($ObjectType.Student__c .fields['Sex1__c']))}">
+       
+    </apex:pageBlockSectionItem> 
+    </Apex:pageBlockSection>
+</apex:form>
+</apex:page>

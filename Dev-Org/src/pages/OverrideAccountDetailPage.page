@@ -1,0 +1,10 @@
+<apex:page standardController="Account" extensions="AccountDetailController">
+    <apex:detail relatedList="false"/>
+    
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Contacts">
+        
+        
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,43 @@
+<apex:page controller="testToggle">
+<apex:form >
+ <apex:pageblockSection >
+         <apex:pageblocksectionitem >             
+                 <apex:outputlabel value="Billing Address"></apex:outputlabel>
+                 <Apex:outputPanel > 
+                    <apex:outputtext value="{!bill}" />             
+                    <apex:commandButton Value="Edit" action="{!edit}" reRender="buttonEdit"  style="margin-left:60px;"/> <br/>  
+                     <apex:outputtext value="{!bill1}" /> &nbsp;                          
+                  </Apex:outputPanel>
+             </apex:pageblockSectionItem>     
+          </apex:pageblocksection>
+
+          <apex:pageblocksection columns="2" rendered="{!editbtn == true}">     
+          <apex:pageblockSectionItem >
+              <apex:outputlabel Value="Billing Address" style="margin-left:50px;font-Weight:bold;"/>  
+          </apex:pageblockSectionItem> <br/>
+              <apex:pageblockSectionItem >
+                Address
+                  <apex:inputTextarea value="{!bill}"/>
+              </apex:pageblockSectionItem>
+              <apex:pageblocksectionItem >
+                 billing Address
+                  <apex:inputtext value="{!bill1}"/>
+              </apex:pageblocksectionItem>
+
+              <apex:pageblockSectionItem >
+                  <apex:commandButton value="Update Address" action="{!updateval}" style="margin-left:120px;"/>   
+              </apex:pageblockSectionItem>
+           </apex:pageblockSection>
+
+           <apex:pageblocksection rendered="{!outputedit == true}" > 
+              <apex:pageblocksectionItem >
+               <apex:outputlabel value="Billing Address"/>
+                 <apex:outputpanel >
+                    {!bill} 
+                    <apex:commandButton Value="Edit" action="{!edit}" style="margin-left:60px;"/> <br/> 
+                     {!bill1} 
+                 </apex:outputpanel>   
+              </apex:pageblocksectionItem>                  
+          </apex:pageblockSection>
+          </apex:form>
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page standardStylesheets="false" showHeader="false">
+  <c:HeaderManuComponent ></c:HeaderManuComponent>
+  
+   
+</apex:page>

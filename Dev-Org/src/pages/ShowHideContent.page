@@ -1,0 +1,15 @@
+<apex:page controller="ShowHideHTMLControler">  
+    <apex:form >  
+<h1>Show/Hide HTML form Visualforce Example</h1>  
+<div id="contentToToggle" style="display:{!if(showContent,"block","none")};">  
+  
+This is the content that will be toggled.  
+</div>  
+<div>  
+  
+This content will not be toggled.  
+</div>  
+  
+        <apex:commandbutton value="Toggle Content" action="{!toggleContent}">  
+    </apex:commandbutton></apex:form>  
+</apex:page>
