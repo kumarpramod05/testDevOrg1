@@ -1,6 +1,7 @@
 /**
-*
-*/
+ *
+ *
+ */
 public with sharing class AccountDetailController {
 
     public Account accountDetail{get; set;}
