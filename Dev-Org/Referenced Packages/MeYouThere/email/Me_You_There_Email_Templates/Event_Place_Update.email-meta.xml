@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>31.0</apiVersion>
+    <available>true</available>
+    <description>Updates attendees on change in Event Place</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Event Place Update</name>
+    <style>none</style>
+    <type>visualforce</type>
+</EmailTemplate>

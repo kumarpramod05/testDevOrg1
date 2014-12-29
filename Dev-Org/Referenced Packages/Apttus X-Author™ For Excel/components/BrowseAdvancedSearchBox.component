@@ -1,0 +1,67 @@
+<!-- 
+    Apttus XAuthor Apps
+    BrowseAdvancedSearchBox
+     
+    @2010-2013 Apttus Inc. All rights reserved.
+
+ -->
+<apex:component controller="Apttus_XApps.DynamicStandardController">
+    <apex:attribute name="stdController" required="true" description="Standard controller" type="ApexPages.StandardController" assignTo="{!standardController}"/>
+    <apex:attribute name="browseController" required="true" description="BrowseController instance" type="Apttus_XApps.BrowseController" assignTo="{!parentController}"/>
+    <apex:attribute name="searchFields" required="true" description="Search fields" type="Apttus_XApps.SearchField[]"/>
+    <apex:attribute name="searchObject" required="true" description="Search object" type="sObject"/>
+
+    <apex:outputpanel id="advSearchPanelOuter">
+
+        <apex:outputpanel id="advSearchPanel">        
+
+            <apex:pageBlock title="{!$Label.apttus_xapps__AdvancedSearch}">
+                
+                <!-- Fields -->
+                <apex:pageBlockSection columns="1">
+                    <apex:repeat value="{!searchFields}" var="cwEl">
+                        <apex:inputField value="{!searchObject[cwEl.fieldName]}"
+                            onkeydown="onAdvSearchKeyPress(event);"
+                            rendered="{!NOT(OR(cwEl.isReference, cwEl.isReadOnly))}"
+                            required="false"
+                            styleClass="searchField" />
+
+                        <apex:inputField value="{!cwEl.fieldWrapper[NSPrefix + cwEl.fieldType + '__c']}"
+                            onkeydown="onAdvSearchKeyPress(event);"
+                            rendered="{!cwEl.isReadOnly}"
+                            required="false"
+                            styleClass="searchField"
+                            label="{!cwEl.fieldLabel}" />
+
+                        <apex:inputText value="{!cwEl.fieldValueInput}"
+                            onkeydown="onAdvSearchKeyPress(event);"
+                            id="tReference" rendered="{!cwEl.isReference}"
+                            required="false"
+                            styleClass="searchField"
+                            label="LOOKUP" />
+                        
+                    </apex:repeat>                                        
+                </apex:pageBlockSection>
+
+                <!-- Buttons -->
+                <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="{!$Label.apttus_xapps__Search}" 
+                            id="submitButtonId" 
+                            onclick="advSearchAction();stopEvent(event);"
+                            rerender="dummy" />
+
+                        <apex:commandButton value="{!$Label.apttus_xapps__ClearAll}" 
+                            onclick="clearInput();"
+                            rerender="dummy" />
+
+                        <apex:actionFunction name="advSearchAction" 
+                            action="{!doSearch}"
+                            status="advSearchStatus"
+                            rerender="resultsSection"
+                            oncomplete="clearCombined();afterPageUpdate();" />
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+
+        </apex:outputpanel>
+    </apex:outputpanel>
+</apex:component>

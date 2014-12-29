@@ -1,0 +1,110 @@
+<apex:component controller="myt.EventPlaceUpdateEmailCtrl" access="global">
+
+    <apex:attribute name="relatedMeetingId" type="Id" description="Event Id for which the stuff should be drawn" assignTo="{!meetingId}" />
+
+    <apex:attribute name="targetObjectId" type="Id" description="Event Id for which the stuff should be drawn" assignTo="{!targetObjId}" />
+
+
+    <html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>Event Place is updated (Does it comes ? )</title>
+        <c:BootstrapEmailFriendlyCSS />
+    </head>
+
+    <body>
+
+ 
+        <div class="container-fluid" style="margin-left:25px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{!event.Subject}</h1>
+
+                    <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(event.location))}">
+                        <div style="background-color: #dff0d8;border-color: #d6e9c6;color: #468847;padding: 8px 35px 8px 14px;margin-bottom: 20px;text-shadow: 0 1px 0 rgba(255,255,255,0.5);">
+                            This event's location has been updated.
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!(ISBLANK(event.location))}">
+                        <div style="padding: 8px 35px 8px 14px;margin-bottom: 20px;text-shadow: 0 1px 0 rgba(255,255,255,0.5);background-color: #fcf8e3;border: 1px solid #fbeed5;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;color: #c09853;">
+                            This event's location has been removed.
+                        </div>
+                    </apex:outputPanel>
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <p><b>When:</b>
+                            </p> 
+                        </div>
+                        <div class="col-md-11">
+                            <p>{!event.ActivityDateTime}</p>
+                        </div>
+                    </div>
+
+                    <apex:outputPanel rendered="{!whoms.size > 0}" layout="none">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <p><b>Who:</b>
+                                </p>
+                            </div>
+                            <div class="col-md-11">
+                                <apex:repeat value="{!whoms}" var="whom"> 
+                                    <p>{!whom.Name}</p>
+                                </apex:repeat>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+
+                    <apex:outputPanel rendered="{!NOT(ISBLANK(event.location))}" layout="none">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <p><b>Where:</b>
+                                </p>
+                            </div>
+                            <div class="col-md-11">
+                                <p>
+                                    {!meeting.Place__r.Name}
+                                </p>
+                                <p>
+                                    <i style="color:gray;">{!meeting.Place__r.myt__Address__c}</i>
+                                </p>
+                                <p>
+                                    {!meeting.Place__r.myt__Contact_Number__c}
+                                </p>
+                            </div>
+                        </div>    
+                    </apex:outputPanel>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-1">
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="col-md-11">
+                            <p>
+                                 <a style="padding:10px;" href="{!baseUrl}/{!event.id}">View Event</a>
+                                 <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(event.location))}">
+                                     <a style="padding:10px;" 
+                                        href="https://www.google.com/maps/preview?q={!meeting.place__r.GeoCode__Latitude__s},{!meeting.place__r.GeoCode__Longitude__s}"> Get Directions</a>
+                                </apex:outputPanel>                                        
+                                
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                
+            </div>
+        </div>
+
+    </body>
+
+    </html>
+
+
+</apex:component>

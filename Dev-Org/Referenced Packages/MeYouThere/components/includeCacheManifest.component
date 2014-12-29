@@ -1,0 +1,10 @@
+<apex:component >
+<!--  
+    Avoid caching host page at any cost
+    http://stackoverflow.com/questions/12105185/html5-offline-manifest-stop-caching-page-it-is-declared-on 
+    
+    disable caching for now
+-->    
+    <iframe src="{!$Page.appOffline}" style="display: none;"></iframe>
+
+</apex:component>

@@ -1,0 +1,91 @@
+<apex:page controller="myt.EventsController" showHeader="false"
+    standardStylesheets="false" docType="html-5.0" sidebar="false" extensions="myt.RemotingFacade"
+    applyHtmlTag="false" applyBodyTag="false" action="{!onInit}">
+    <html>
+         <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <link rel="stylesheet" href="{!URLFOR($Resource.html5Frameworks,'sf1-bootstrap/css/bootstrap.min.css' )}"/>
+            <link rel="stylesheet" href="{!URLFOR($Resource.lib_ratchet,'css/mut.css' )}"/>
+            <link rel="stylesheet" href="{!URLFOR($Resource.mutAppStyles)}"/>
+            <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.html5Frameworks,'all.minified.js')}"></script>
+            <c:ngServiceGlobalConfig />  
+           <script type="text/javascript"> 
+                (function(window, angular){ 'use strict';
+                // {!$page.events}
+                    // Only Factory which needs to stay on page because of VF exppression dependencies
+                    var app = angular.module('meyouthere.factories.vf-page-data', []);
+                    app.factory('VFPageData', function() {
+                         return {
+                                currentUserId : '{!$User.Id}', 
+                                personalConfig : JSON.parse('{!JSENCODE(personalConfigJson)}'),
+                                parameters : { 
+                                    id : '{!$CurrentPage.parameters.id}'   
+                                },
+                                remoteActions: {
+                                    confirmMeetingPlace : '{!$RemoteAction.RemotingFacade.confirmMeetingPlace}',
+                                    removeConfirmedMeetingPlace: '{!$RemoteAction.RemotingFacade.removeConfirmedMeetingPlace}',
+                                    addInviteeResponse:'{!$RemoteAction.RemotingFacade.addInviteeResponse}',
+                                    deleteEventById:'{!$RemoteAction.RemotingFacade.deleteEventById}',
+                                    loadEvents:'{!$RemoteAction.RemotingFacade.loadEventList}',
+                                    loadEvent:'{!$RemoteAction.RemotingFacade.loadEvent}',
+                                    updatePlacesConfig:'{!$RemoteAction.RemotingFacade.updatePlacesConfig}'
+                                }
+                            }; 
+                    });
+                
+                })(window, window.angular);
+            </script>
+            
+            <script type="text/javascript"> 
+                 // basic structure here            
+                var meyouthereApp = angular.module('meyouthere', [
+                                                        'ui.router',
+                                                        'meyouthere.controllers.events', 
+                                                        'meyouthere.controllers.test',
+                                                        'meyouthere.controllers.places',
+                                                        'meyouthere.controllers.filters',
+                                                        'meyouthere.controllers.place-detail',
+                                                    ]);
+                                                    
+                 meyouthereApp.config(function($stateProvider, $urlRouterProvider) {
+                    $urlRouterProvider.otherwise('/events');
+                    $stateProvider
+                        .state('events', {
+                            url             : '/events',
+                            templateUrl     : '{!URLFOR($Resource.mutAppViews, 'events/view.tmplext.html')}',
+                            controller      : 'EventListController',
+                            data            : {}
+                        })
+                        .state('filters', {
+                            url             : '/filters',
+                            templateUrl     : '{!URLFOR($Resource.mutAppViews, 'filters/view.tmplext.html')}',
+                            controller      : 'FiltersController',
+                            data            : {} 
+                        })
+                        .state('places', {
+                            url             : '/places/:eventId',
+                            templateUrl     : '{!URLFOR($Resource.mutAppViews, 'placeList/view.tmplext.html')}',
+                            controller      : 'PlaceListController',
+                            data            : {}
+                        })
+                        .state('place-detail', {
+                            url             : '/placeDetail/:eventId/:gPlaceId',
+                            templateUrl     : '{!URLFOR($Resource.mutAppViews, 'placeDetail/view.tmplext.html')}',
+                            controller      : 'PlaceDetailController',
+                            data            : {}
+                        })
+                });                                                    
+            </script>
+            <script type="text/javascript" src="{!URLFOR($Resource.mutApp)}"></script>                       
+         </head>
+        
+        <body ng-app="meyouthere" class="bootstrap">
+            <div class="ng-cloak">
+                <ui-view></ui-view>
+            </div>
+           <c:includeCacheManifest />
+        </body>
+   </html>
+</apex:page>

@@ -1,0 +1,20 @@
+<apex:page contentType="text/cache-manifest" applyHtmlTag="false" 
+    controller="myt.ThirdPartyLibsCacheManifestController"
+     standardStylesheets="false" showHeader="false">CACHE MANIFEST
+# Last Changed At : {!lastChangedTimeInMillis}
+
+NETWORK:
+*
+
+CACHE:
+# all static resources to be cached
+{!URLFOR($Resource.myt__html5Frameworks,'sf1-bootstrap/css/bootstrap.min.css')}
+{!URLFOR($Resource.myt__html5Frameworks,'all.minified.js')}
+{!URLFOR($Resource.myt__mutApp)}    
+{!URLFOR($Resource.myt__mutAppStyles)}    
+{!URLFOR($Resource.myt__mutAppViews, 'placeList/view.tmplext.html')}
+{!URLFOR($Resource.myt__mutAppViews, 'events/view.tmplext.html')}
+{!URLFOR($Resource.myt__mutAppViews, 'placeDetail/view.tmplext.html')}
+{!URLFOR($Resource.myt__mutAppViews, 'filters/view.tmplext.html')}
+
+</apex:page>

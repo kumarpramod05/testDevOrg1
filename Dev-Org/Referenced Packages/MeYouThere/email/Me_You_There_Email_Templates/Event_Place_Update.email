@@ -1,0 +1,7 @@
+<messaging:emailTemplate subject="Updated Invitation: {!relatedTo.myt__Event_Subject__c}" 
+    recipientType="User" relatedToType="myt__Meeting__c">
+
+    <messaging:htmlEmailBody >
+        <c:eventPlaceUpdateEmail relatedMeetingId="{!relatedTo.Id}" targetObjectId="{!recipient.Id}"/>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

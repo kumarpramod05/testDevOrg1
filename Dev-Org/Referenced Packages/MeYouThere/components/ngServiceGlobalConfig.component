@@ -1,0 +1,16 @@
+<apex:component controller="myt.GlobalConfig">
+    <script type="text/javascript"> 
+        (function(window, angular){ 'use strict';
+            var app = angular.module('meyouthere.services.globalconfig', []);
+            
+            app.service('MUTGlobalConfigService', ['$window', function(win) {
+            	return { 
+            	        // More global config options to live here some day
+                	    pak : '{!JSENCODE(GooglePlacesAPIKey)}'
+                  };
+            }]);  
+              
+        })(window, window.angular);
+        
+    </script>    
+</apex:component>

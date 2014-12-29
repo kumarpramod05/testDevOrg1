@@ -1,0 +1,3 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" manifest="{!$Page.myt__thirdPartyLibsCacheManifest}">
+<h1>This app doesn't supports offline access, please try again with internet connectivity. </h1>
+</apex:page>

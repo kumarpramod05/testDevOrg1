@@ -1,0 +1,22 @@
+<apex:page showHeader="false"
+    standardStylesheets="false" docType="html-5.0" sidebar="false" 
+    applyHtmlTag="false" applyBodyTag="false" >
+    <html>
+         <head>
+               <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+               <link rel="stylesheet" href="{!URLFOR($Resource.html5Frameworks,'sf1-bootstrap/css/bootstrap.min.css' )}"/>
+         </head>
+        
+        <body class="bootstrap">
+            <div class="col-xs-12">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4>{!IF(ISBLANK($CurrentPage.parameters.title), 'Error', $CurrentPage.parameters.title)}</h4>
+                    <strong>{!$CurrentPage.parameters.message}</strong>
+                    <p>Please contact your administrator !</p>
+                </div>
+            </div>
+        </body>
+   </html>
+</apex:page>
